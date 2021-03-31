@@ -3,6 +3,7 @@
 #include <cstddef>
 #include <string>
 #include <vector>
+#include <iostream>
 
 enum class Type
 {
@@ -68,10 +69,18 @@ enum class Type
   Slash,
 };
 
+inline std::ostream& operator<<(std::ostream& os, const Type& token) {
+  os << (int)token;
+  return os;
+}
 struct Token
 {
   Type        type;
   std::string text;
+  friend std::ostream& operator<<(std::ostream& os, const Token& token) {
+    os << token.type << " : " << token.text << "\n";
+    return os;
+  }
 };
 
 class Lexer
